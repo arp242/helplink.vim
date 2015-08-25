@@ -1,0 +1,11 @@
+:Helplink	helplink.txt	/*:Helplink*
+g:helplink_copy_to_registers	helplink.txt	/*g:helplink_copy_to_registers*
+g:helplink_default_format	helplink.txt	/*g:helplink_default_format*
+g:helplink_formats	helplink.txt	/*g:helplink_formats*
+g:helplink_url	helplink.txt	/*g:helplink_url*
+helplink	helplink.txt	/*helplink*
+helplink#link()	helplink.txt	/*helplink#link()*
+helplink-commands	helplink.txt	/*helplink-commands*
+helplink-functions	helplink.txt	/*helplink-functions*
+helplink-options	helplink.txt	/*helplink-options*
+helplink.txt	helplink.txt	/*helplink.txt*

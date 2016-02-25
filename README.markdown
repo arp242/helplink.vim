@@ -39,7 +39,7 @@ Automatically copy the link to these registers.
 http://vimhelp.appspot.com/%%FILE%%.html#%%TAGNAME_QUOTED%%)
 
 Available placeholders:
-- `{%%FILE%%}`          File name (e.g. `options.txt`)
+- `%%FILE%%`            File name (e.g. `options.txt`)
 - `%%TAGNAME%%`         Tag name (e.g. 'expandtab')
 - `%%TAGNAME_QUOTED%%`  The quoted tag name for use in URLS (e.g. %27expandtab%27)
 

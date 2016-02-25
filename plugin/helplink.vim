@@ -15,7 +15,7 @@ set cpo&vim
 
 let g:helplink_formats = {
 \	'markdown':  "'[`:help ' . l:tagname . '`](' . l:url . ')'",
-\	'html': "'<a href=\"' . l:url . '\">:help ' . l:tagname . '</a>'",
+\	'html': "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
 \	'bbcode': "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'"
 \}
 
@@ -146,7 +146,7 @@ unlet s:save_cpo
 
 " The MIT License (MIT)
 "
-" Copyright © 2015 Martin Tournoij
+" Copyright © 2015-2016 Martin Tournoij
 "
 " Permission is hereby granted, free of charge, to any person obtaining a copy
 " of this software and associated documentation files (the "Software"), to

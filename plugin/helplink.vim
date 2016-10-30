@@ -8,7 +8,7 @@
 "##########################################################
 " Initialize some stuff
 scriptencoding utf-8
-"if exists('g:loaded_helplink') | finish | endif
+if exists('g:loaded_helplink') | finish | endif
 let g:loaded_helplink = 1
 let s:save_cpo = &cpo
 set cpo&vim

@@ -66,7 +66,7 @@ fun! s:get_tag() abort
 
 	" Search backwards for the first tag
 	normal! $
-	if !search('\*\zs[^*]\+\*$', 'bcW')
+	if !search('\*\zs[^*]\+\*$', 'bcW') && !search('\*\zs[^*]\+\.[^*]\+\*', 'bcW')
 		call setpos('.', l:save_cursor)
 		echohl ErrorMsg | echom 'No tag found before the cursor.' | echohl None
 		return

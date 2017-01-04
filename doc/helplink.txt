@@ -21,8 +21,8 @@ COMMANDS                                                   *helplink-commands*
 
         Try to find the tag closest to the cursor (backwards search only) and
         format it. If multiple tags are found on the same line, it asks the
-        user which one to pick. If no tag is found them link to the current
-        section name.
+        user which one to pick. If no tag is found then it will link to the
+        current filename (e.g. {syntax.txt}).
 
         This will echo the formatted URL and copy them to the registers in
         |g:helplink_copy_to_registers|.
@@ -31,9 +31,9 @@ COMMANDS                                                   *helplink-commands*
         value of |g:helplink_default_format| is used.
 
 ==============================================================================
-OPTIONS                                                      *helplink-options*
+OPTIONS                                                     *helplink-options*
 
-*g:helplink_copy_to_registers*                      (List, default: ['+', '*'])
+*g:helplink_copy_to_registers*                     (List, default: ['+', '*'])
 
         Automatically copy the link to these registers.
 
@@ -57,7 +57,7 @@ OPTIONS                                                      *helplink-options*
         This string is |eval|-ed, variables you can use are {l:tagname} and
         {l:url}.
 
-*g:helplink_default_format*                         (String, default: markdown)
+*g:helplink_default_format*                        (String, default: markdown)
 
         Available formats:
             - markdown

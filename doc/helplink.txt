@@ -21,7 +21,8 @@ COMMANDS                                                   *helplink-commands*
 
         Try to find the tag closest to the cursor (backwards search only) and
         format it. If multiple tags are found on the same line, it asks the
-        user which one to pick.
+        user which one to pick. If no tag is found them link to the current
+        section name.
 
         This will echo the formatted URL and copy them to the registers in
         |g:helplink_copy_to_registers|.

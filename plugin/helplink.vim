@@ -94,12 +94,12 @@ fun! s:get_tag() abort
 endfun
 
 
-" Escape HTML
+" urlencode
 fun! s:quote_url(str) abort
 	let l:new = ''
 	for l:i in range(1, strlen(a:str))
 		let l:c = a:str[l:i - 1]
-		if l:c =~ '\w\|-'
+		if l:c =~ '[a-zA-Z0-9\-\._]'
 			let l:new .= l:c
 		else
 			let l:new .= toupper(printf('%%%02x', char2nr(l:c)))

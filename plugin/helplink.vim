@@ -25,6 +25,7 @@ let g:helplink_formats = {
 let g:helplink_copy_to_registers = ['+', '*']
 let g:helplink_url = 'http://vimhelp.appspot.com/%%FILE%%.html#%%TAGNAME_QUOTED%%'
 let g:helplink_default_format = 'markdown'
+let g:helplink_choose_tag_under_cursor = 0
 
 
 "##########################################################
@@ -61,7 +62,7 @@ endfun
 
 " Get the name of the nearest tag. If there are multiple ask the user to choose
 " one.
-fun! s:get_tag() abort
+fun! s:get_tag(wordUnderCursor) abort
 	let l:save_cursor = getpos('.')
 
 	" Search backwards for the first tag
@@ -82,12 +83,22 @@ fun! s:get_tag() abort
 	endif
 
 	" Let the user choose
+	let l:printText = ""
+	let l:tagUnderCursor = -1
 	let l:i = 1
 	for l:t in l:tags
-		echo l:i . ' ' . l:t
+		let l:printText .= l:i . ' ' . l:t."\n"
+		if l:t == a:wordUnderCursor
+			let l:tagUnderCursor = l:i
+		endif
 		let l:i += 1
 	endfor
-	let l:choice = input('Which one: ')
+	if g:helplink_choose_tag_under_cursor && l:tagUnderCursor != -1
+		let l:choice = l:tagUnderCursor
+	else
+		echo l:printText
+		let l:choice = input('Which one: ')
+	endif
 	echo "\n"
 	call setpos('.', l:save_cursor)
 	return l:tags[l:choice - 1]
@@ -117,7 +128,7 @@ fun! s:make_url() abort
 	endif
 
 	let l:file = split(expand('%'), '/')[-1]
-	let l:tagname = s:get_tag()
+	let l:tagname = s:get_tag(expand('<cword>'))
 	if empty(l:tagname) | return | endif
 	let l:tagname_q = s:quote_url(l:tagname)
 

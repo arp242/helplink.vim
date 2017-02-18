@@ -69,7 +69,7 @@ OPTIONS                                                     *helplink-options*
 
         You can add your own in |g:helplink_formats|.
 
-*g:helplink_always_ask*                                 (Bool, default: false)
+*g:helplink_always_ask*                                     (Bool, default: 0)
 
         Always ask which help tag to copy, even if the cursor is on a tag.
         This was the default behaviour before 2017-02-18.

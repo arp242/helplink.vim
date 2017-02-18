@@ -1,4 +1,5 @@
 :Helplink	helplink.txt	/*:Helplink*
+g:helplink_always_ask	helplink.txt	/*g:helplink_always_ask*
 g:helplink_copy_to_registers	helplink.txt	/*g:helplink_copy_to_registers*
 g:helplink_default_format	helplink.txt	/*g:helplink_default_format*
 g:helplink_formats	helplink.txt	/*g:helplink_formats*

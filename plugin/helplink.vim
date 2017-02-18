@@ -25,7 +25,7 @@ let g:helplink_formats = {
 let g:helplink_copy_to_registers = ['+', '*']
 let g:helplink_url = 'http://vimhelp.appspot.com/%%FILE%%.html#%%TAGNAME_QUOTED%%'
 let g:helplink_default_format = 'markdown'
-let g:helplink_choose_tag_under_cursor = 0
+let g:helplink_always_ask = 0
 
 
 "##########################################################
@@ -60,8 +60,7 @@ fun! s:echo(str)
 endfun
 
 
-" Get the name of the nearest tag. If there are multiple ask the user to choose
-" one.
+" Get the name of the nearest tag.
 fun! s:get_tag(wordUnderCursor) abort
 	let l:save_cursor = getpos('.')
 
@@ -93,7 +92,8 @@ fun! s:get_tag(wordUnderCursor) abort
 		endif
 		let l:i += 1
 	endfor
-	if g:helplink_choose_tag_under_cursor && l:tagUnderCursor != -1
+
+	if l:tagUnderCursor != -1 && !g:helplink_always_ask
 		let l:choice = l:tagUnderCursor
 	else
 		echo l:printText

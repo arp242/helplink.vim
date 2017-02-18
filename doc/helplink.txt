@@ -21,21 +21,24 @@ COMMANDS                                                   *helplink-commands*
 
         Try to find the tag closest to the cursor (backwards search only) and
         format it. If multiple tags are found on the same line, it asks the
-        user which one to pick. If no tag is found then it will link to the
-        current filename (e.g. {syntax.txt}).
+        user which one to pick unless the cursor is currently on one of the
+        tags, in which case we assume the user wants to copy that tag and
+        don't ask for confirmation.
+        If no tag is found then it will link to the current filename (e.g.
+        {syntax.txt}).
 
-        This will echo the formatted URL and copy them to the registers in
+        The formatted URL will be printed and copied to the registers in
         |g:helplink_copy_to_registers|.
 
-        You can {format} parameter to get a different format; if not given the
-        value of |g:helplink_default_format| is used.
+        You can use the {format} parameter to get a different format; if not
+        given the value of |g:helplink_default_format| is used.
 
 ==============================================================================
 OPTIONS                                                     *helplink-options*
 
 *g:helplink_copy_to_registers*                     (List, default: ['+', '*'])
 
-        Automatically copy the link to these registers.
+        Automatically copy the link to the specified registers.
 
 *g:helplink_url*                                 (URL, default:
                  http://vimhelp.appspot.com/%%FILE%%.html#%%TAGNAME_QUOTED%%)
@@ -46,12 +49,12 @@ OPTIONS                                                     *helplink-options*
             - %%TAGNAME_QUOTED%%  The quoted tag name for use in URLS
                                   (e.g. %27expandtab%27)
 
-*g:helplink_formats*                                        (dict, default:
+*g:helplink_formats*                                        (Dict, default:
 >
         {
-        \	'markdown':  "'[`:help ' . l:tagname . '`](' . l:url . ')'",
-        \	'html': "'<a href=\"' . l:url . '\">:help ' . l:tagname . '</a>'",
-        \	'bbcode': "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'"
+        \  'markdown':  "'[`:help ' . l:tagname . '`](' . l:url . ')'",
+        \  'html': "'<a href=\"' . l:url . '\">:help ' . l:tagname . '</a>'",
+        \  'bbcode': "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'"
         \}
 <
         This string is |eval|-ed, variables you can use are {l:tagname} and
@@ -65,6 +68,11 @@ OPTIONS                                                     *helplink-options*
             - bbcode
 
         You can add your own in |g:helplink_formats|.
+
+*g:helplink_always_ask*                                 (Bool, default: false)
+
+        Always ask which help tag to copy, even if the cursor is on a tag.
+        This was the default behaviour before 2017-02-18.
 
 ==============================================================================
 FUNCTIONS                                                 *helplink-functions*

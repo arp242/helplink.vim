@@ -99,8 +99,8 @@ fun! s:get_tag(wordUnderCursor) abort
 	else
 		echo l:printText
 		let l:choice = input('Which one: ')
+    echo "\n"
 	endif
-	echo "\n"
 	call setpos('.', l:save_cursor)
 	return l:tags[l:choice - 1]
 endfun

@@ -14,9 +14,9 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 let g:helplink_formats = {
-\	'markdown':  "'[`:help ' . l:tagname . '`](' . l:url . ')'",
-\	'html': "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
-\	'bbcode': "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'"
+\	'markdown':  "'[`%s' . l:tagname . '`](' . l:url . ')'",
+\	'html': "'<a href=\"' . l:url . '\"><code>%s' . l:tagname . '</code></a>'",
+\	'bbcode': "'[url=' . l:url . '][code]%s' . l:tagname . '[/code][/url]'"
 \}
 
 
@@ -36,7 +36,8 @@ command! -nargs=* Helplink call s:echo(helplink#link(<q-args>))
 "##########################################################
 " Functions
 fun! helplink#link(...) abort
-	let l:format = (a:0 >= 1 && !empty(a:1)) ? a:1 : g:helplink_default_format
+	let l:tag    = a:0 > 1 ? a:2 : ':help '
+	let l:format = (a:0 && !empty(a:1)) ? a:1 : g:helplink_default_format
 	if !has_key(g:helplink_formats, l:format)
 		echoerr "Unknown format: `" . l:format . "'"
 		return
@@ -46,7 +47,7 @@ fun! helplink#link(...) abort
 	if empty(l:r) | return | endif
 
 	let [l:tagname, l:tagname_q, l:url] = l:r
-	let l:out = eval(g:helplink_formats[l:format])
+	let l:out = eval(printf(g:helplink_formats[l:format], l:tag))
 	call s:copy_to_registers(l:out)
 	return l:out
 endfun

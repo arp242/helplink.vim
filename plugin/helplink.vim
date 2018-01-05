@@ -14,9 +14,15 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 let g:helplink_formats = {
-\	'markdown':  "'[`:help ' . l:tagname . '`](' . l:url . ')'",
-\	'html': "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
-\	'bbcode': "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'"
+\	'markdown':    "'[`:help ' . l:tagname . '`](' . l:url . ')'",
+\	'markdown_h':  "'[`':h ' . l:tagname . '`](' . l:url . ')'",
+\	'markdown_nt': "'[`' . l:tagname . '`](' . l:url . ')'",
+\	'html':        "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
+\	'html_h':      "'<a href=\"' . l:url . '\"><code>:h ' . l:tagname . '</code></a>'",
+\	'html_nt':     "'<a href=\"' . l:url . '\"><code>' . l:tagname . '</code></a>'",
+\	'bbcode':      "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'",
+\	'bbcode_h':    "'[url=' . l:url . '][code]:h ' . l:tagname . '[/code][/url]'",
+\	'bbcode_nt':   "'[url=' . l:url . '][code]' . l:tagname . '[/code][/url]'",
 \}
 
 
@@ -36,7 +42,7 @@ command! -nargs=* Helplink call s:echo(helplink#link(<q-args>))
 "##########################################################
 " Functions
 fun! helplink#link(...) abort
-	let l:format = (a:0 >= 1 && !empty(a:1)) ? a:1 : g:helplink_default_format
+	let l:format = (a:0 && !empty(a:1)) ? a:1 : g:helplink_default_format
 	if !has_key(g:helplink_formats, l:format)
 		echoerr "Unknown format: `" . l:format . "'"
 		return
@@ -66,7 +72,7 @@ fun! s:get_tag(wordUnderCursor) abort
 
 	" Search backwards for the first tag
 	normal! $
-	if !search('\*\zs[^*]\+\*$', 'bcW') && !search('\*\zs[^*]\+\.[^*]\+\*', 'bcW')
+	if !search('\*\zs[^*]\+\*', 'bcW') && !search('\*\zs[^*]\+\.[^*]\+\*', 'bcW')
 		call setpos('.', l:save_cursor)
 		echohl ErrorMsg | echom 'No tag found before the cursor.' | echohl None
 		return
@@ -98,8 +104,8 @@ fun! s:get_tag(wordUnderCursor) abort
 	else
 		echo l:printText
 		let l:choice = input('Which one: ')
+		echo "\n"
 	endif
-	echo "\n"
 	call setpos('.', l:save_cursor)
 	return l:tags[l:choice - 1]
 endfun

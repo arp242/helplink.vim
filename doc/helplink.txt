@@ -52,13 +52,15 @@ OPTIONS                                                     *helplink-options*
 *g:helplink_formats*                                        (Dict, default:
 >
         {
-        \  'markdown':  "'[`:help ' . l:tagname . '`](' . l:url . ')'",
-        \  'html': "'<a href=\"' . l:url . '\">:help ' . l:tagname . '</a>'",
-        \  'bbcode': "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'"
+        \  'markdown': "'[`:help ' . l:tagname . '`](' . l:url . ')'",
+        \  'html':     "'<a href=\"' . l:url . '\">:help ' . l:tagname . '</a>'",
+        \  'bbcode':   "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'"
         \}
 <
         This string is |eval|-ed, variables you can use are {l:tagname} and
-        {l:url}.
+        {l:url}. For all three formats there are three variants denoted by a
+        suffix: `_h`, which uses `:h` instead of `:help`, and `_nt`, which
+        doesn't add a tag at all (e.g. `markdown_h`, `html_nt`, etc.)
 
 *g:helplink_default_format*                        (String, default: markdown)
 
@@ -79,7 +81,8 @@ FUNCTIONS                                                 *helplink-functions*
 
 helplink#link([{format}])                                    *helplink#link()*
 
-        Implements the |:Helplink| command; the {format} is optional.
+        Implements the |:Helplink| command; the {format} is optional (see
+        |g:helplink_formats|).
 
 
 vim:tw=78:ts=8:ft=help:norl:expandtab

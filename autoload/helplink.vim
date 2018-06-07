@@ -11,10 +11,18 @@ let g:helplink_formats = {
 \}
 
 " Options
-let g:helplink_copy_to_registers = ['+', '*']
-let g:helplink_url = 'http://vimhelp.appspot.com/%%FILE%%.html#%%TAGNAME_QUOTED%%'
-let g:helplink_default_format = 'markdown'
-let g:helplink_always_ask = 0
+if !exists('g:helplink_copy_to_registers')
+	let g:helplink_copy_to_registers = ['+', '*']
+endif
+if !exists('g:helplink_url')
+	let g:helplink_url = 'http://vimhelp.appspot.com/%%FILE%%.html#%%TAGNAME_QUOTED%%'
+endif
+if !exists('g:helplink_default_format')
+	let g:helplink_default_format = 'markdown'
+endif
+if !exists('g:helplink_always_ask')
+	let g:helplink_always_ask = 0
+endif
 
 fun! helplink#link(...) abort
 	let l:format = (a:0 && !empty(a:1)) ? a:1 : g:helplink_default_format

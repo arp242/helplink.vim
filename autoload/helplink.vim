@@ -1,16 +1,17 @@
-let g:helplink_formats = {
-\	'markdown':    "'[`:help ' . l:tagname . '`](' . l:url . ')'",
-\	'markdown_h':  "'[`':h ' . l:tagname . '`](' . l:url . ')'",
-\	'markdown_nt': "'[`' . l:tagname . '`](' . l:url . ')'",
-\	'html':        "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
-\	'html_h':      "'<a href=\"' . l:url . '\"><code>:h ' . l:tagname . '</code></a>'",
-\	'html_nt':     "'<a href=\"' . l:url . '\"><code>' . l:tagname . '</code></a>'",
-\	'bbcode':      "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'",
-\	'bbcode_h':    "'[url=' . l:url . '][code]:h ' . l:tagname . '[/code][/url]'",
-\	'bbcode_nt':   "'[url=' . l:url . '][code]' . l:tagname . '[/code][/url]'",
-\}
-
 " Options
+if !exists('g:helplink_formats')
+	let g:helplink_formats = {
+	\	'markdown':    "'[`:help ' . l:tagname . '`](' . l:url . ')'",
+	\	'markdown_h':  "'[`':h ' . l:tagname . '`](' . l:url . ')'",
+	\	'markdown_nt': "'[`' . l:tagname . '`](' . l:url . ')'",
+	\	'html':        "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
+	\	'html_h':      "'<a href=\"' . l:url . '\"><code>:h ' . l:tagname . '</code></a>'",
+	\	'html_nt':     "'<a href=\"' . l:url . '\"><code>' . l:tagname . '</code></a>'",
+	\	'bbcode':      "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'",
+	\	'bbcode_h':    "'[url=' . l:url . '][code]:h ' . l:tagname . '[/code][/url]'",
+	\	'bbcode_nt':   "'[url=' . l:url . '][code]' . l:tagname . '[/code][/url]'",
+	\}
+endif
 if !exists('g:helplink_copy_to_registers')
 	let g:helplink_copy_to_registers = ['+', '*']
 endif

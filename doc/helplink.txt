@@ -54,13 +54,15 @@ OPTIONS                                                     *helplink-options*
         {
         \  'markdown': "'[`:help ' . l:tagname . '`](' . l:url . ')'",
         \  'html':     "'<a href=\"' . l:url . '\">:help ' . l:tagname . '</a>'",
-        \  'bbcode':   "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'"
+        \  'bbcode':   "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'",
+        \  'plain':    "l:url"
         \}
 <
         This string is |eval|-ed, variables you can use are {l:tagname} and
-        {l:url}. For all three formats there are three variants denoted by a
-        suffix: `_h`, which uses `:h` instead of `:help`, and `_nt`, which
-        doesn't add a tag at all (e.g. `markdown_h`, `html_nt`, etc.)
+        {l:url}. For all three markup formats ("markdown", "html" and "bbcode")
+        there are three variants denoted by a suffix: `_h`, which uses `:h`
+        instead of `:help`, and `_nt`, which doesn't add a tag at all (e.g.
+        `markdown_h`, `html_nt`, etc.)
 
 *g:helplink_default_format*                        (String, default: markdown)
 

@@ -10,6 +10,7 @@ if !exists('g:helplink_formats')
 	\	'bbcode':      "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'",
 	\	'bbcode_h':    "'[url=' . l:url . '][code]:h ' . l:tagname . '[/code][/url]'",
 	\	'bbcode_nt':   "'[url=' . l:url . '][code]' . l:tagname . '[/code][/url]'",
+	\	'plain':       "l:url"
 	\}
 endif
 if !exists('g:helplink_copy_to_registers')

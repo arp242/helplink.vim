@@ -1,16 +1,18 @@
-let g:helplink_formats = {
-\	'markdown':    "'[`:help ' . l:tagname . '`](' . l:url . ')'",
-\	'markdown_h':  "'[`':h ' . l:tagname . '`](' . l:url . ')'",
-\	'markdown_nt': "'[`' . l:tagname . '`](' . l:url . ')'",
-\	'html':        "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
-\	'html_h':      "'<a href=\"' . l:url . '\"><code>:h ' . l:tagname . '</code></a>'",
-\	'html_nt':     "'<a href=\"' . l:url . '\"><code>' . l:tagname . '</code></a>'",
-\	'bbcode':      "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'",
-\	'bbcode_h':    "'[url=' . l:url . '][code]:h ' . l:tagname . '[/code][/url]'",
-\	'bbcode_nt':   "'[url=' . l:url . '][code]' . l:tagname . '[/code][/url]'",
-\}
-
 " Options
+if !exists('g:helplink_formats')
+	let g:helplink_formats = {
+	\	'markdown':    "'[`:help ' . l:tagname . '`](' . l:url . ')'",
+	\	'markdown_h':  "'[`:h ' . l:tagname . '`](' . l:url . ')'",
+	\	'markdown_nt': "'[`' . l:tagname . '`](' . l:url . ')'",
+	\	'html':        "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
+	\	'html_h':      "'<a href=\"' . l:url . '\"><code>:h ' . l:tagname . '</code></a>'",
+	\	'html_nt':     "'<a href=\"' . l:url . '\"><code>' . l:tagname . '</code></a>'",
+	\	'bbcode':      "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'",
+	\	'bbcode_h':    "'[url=' . l:url . '][code]:h ' . l:tagname . '[/code][/url]'",
+	\	'bbcode_nt':   "'[url=' . l:url . '][code]' . l:tagname . '[/code][/url]'",
+	\	'plain':       "l:url"
+	\}
+endif
 if !exists('g:helplink_copy_to_registers')
 	let g:helplink_copy_to_registers = ['+', '*']
 endif
@@ -25,13 +27,40 @@ if !exists('g:helplink_always_ask')
 endif
 
 fun! helplink#link(...) abort
-	let l:format = (a:0 && !empty(a:1)) ? a:1 : g:helplink_default_format
+	let l:subject = ''
+	let l:format = g:helplink_default_format
+
+	if a:0 && !empty(a:1)
+		let l:args = split(a:1)
+		if has_key(g:helplink_formats, l:args[0])
+			let l:format = l:args[0]
+			if len(l:args) > 1
+				let l:subject = l:args[1]
+			endif
+		else
+			let l:subject = l:args[0]
+			if len(l:args) > 1 && has_key(g:helplink_formats, l:args[1])
+				let l:format = l:args[1]
+			endif
+		endif
+	endif
+
+	if &filetype !=# 'help' && l:subject ==# ''
+		echoerr 'Help subject required'
+		return
+	endif
+
 	if !has_key(g:helplink_formats, l:format)
 		echoerr "Unknown format: `" . l:format . "'"
 		return
 	endif
 
+	if len(l:subject)
+		silent execute 'tab help' l:subject
+	endif
+
 	let l:r = s:make_url()
+	if len(l:subject) | tabclose | endif
 	if empty(l:r) | return | endif
 
 	let [l:tagname, l:tagname_q, l:url] = l:r

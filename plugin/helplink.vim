@@ -13,11 +13,7 @@ let g:loaded_helplink = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-augroup helplink.vim
-	autocmd!
-	autocmd Filetype help 
-		\ command! -buffer -nargs=* Helplink call s:echo(helplink#link(<q-args>))
-augroup end
+command! -nargs=* -complete=help Helplink call s:echo(helplink#link(<q-args>))
 
 " Echo only if string is non-empty
 fun! s:echo(str)

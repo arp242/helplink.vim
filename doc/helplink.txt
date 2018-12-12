@@ -17,13 +17,20 @@ http://meta.vi.stackexchange.com/a/1250/51
 ==============================================================================
 COMMANDS                                                   *helplink-commands*
 
-:Helplink {format}                                                 *:Helplink*
+:Helplink [subject] [format]                                       *:Helplink*
+>
+        :Helplink search() plain
+        :Helplink markdown_h 'shiftwidth'
+        :Helplink i^x^o
+<
+        Search for help {subject}. {subject} is required except inside help
+        buffers.
 
-        Try to find the tag closest to the cursor (backwards search only) and
-        format it. If multiple tags are found on the same line, it asks the
-        user which one to pick unless the cursor is currently on one of the
-        tags, in which case we assume the user wants to copy that tag and
-        don't ask for confirmation.
+        When run inside a help buffer, try to find the tag closest to the
+        cursor (backwards search only) and format it. If multiple tags are
+        found on the same line, it asks the user which one to pick unless the
+        cursor is currently on one of the tags, in which case we assume the
+        user wants to copy that tag and don't ask for confirmation.
         If no tag is found then it will link to the current filename (e.g.
         {syntax.txt}).
 

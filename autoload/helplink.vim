@@ -2,7 +2,7 @@
 if !exists('g:helplink_formats')
 	let g:helplink_formats = {
 	\	'markdown':    "'[`:help ' . l:tagname . '`](' . l:url . ')'",
-	\	'markdown_h':  "'[`':h ' . l:tagname . '`](' . l:url . ')'",
+	\	'markdown_h':  "'[`:h ' . l:tagname . '`](' . l:url . ')'",
 	\	'markdown_nt': "'[`' . l:tagname . '`](' . l:url . ')'",
 	\	'html':        "'<a href=\"' . l:url . '\"><code>:help ' . l:tagname . '</code></a>'",
 	\	'html_h':      "'<a href=\"' . l:url . '\"><code>:h ' . l:tagname . '</code></a>'",

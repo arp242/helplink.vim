@@ -29,8 +29,7 @@ endif
 fun! helplink#link(...) abort
 	let l:format = (a:0 && !empty(a:1)) ? a:1 : g:helplink_default_format
 	if !has_key(g:helplink_formats, l:format)
-		echoerr "Unknown format: `" . l:format . "'"
-		return
+		return s:err('unknown format: "%s"', l:format)
 	endif
 
 	let l:r = s:make_url()
@@ -53,8 +52,7 @@ fun! s:get_tag(wordUnderCursor) abort
 	normal! $
 	if !search('\*\zs[^*]\+\*', 'bcW') && !search('\*\zs[^*]\+\.[^*]\+\*', 'bcW')
 		call setpos('.', l:save_cursor)
-		echohl ErrorMsg | echom 'No tag found before the cursor.' | echohl None
-		return
+		return s:err('no tag found before the cursor')
 	endif
 
 	" There are often a bunch of tags on a single line, get them all
@@ -108,8 +106,7 @@ endfun
 " Make an URL
 fun! s:make_url() abort
 	if expand('%') == ''
-		echohl ErrorMsg | echom 'This buffer has no file.' | echohl None
-		return
+		return s:err('this buffer has no file')
 	endif
 
 	let l:file = split(expand('%'), '/')[-1]
@@ -135,3 +132,8 @@ fun! s:copy_to_registers(str) abort
 	endif
 endfun
 
+fun! s:err(msg, ...) abort
+	echohl ErrorMsg
+	echom 'helplink: ' . call('printf', [a:msg] + a:000)
+	echohl None
+endfun

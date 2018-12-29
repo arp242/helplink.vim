@@ -10,7 +10,7 @@ if !exists('g:helplink_formats')
 	\	'bbcode':      "'[url=' . l:url . '][code]:help ' . l:tagname . '[/code][/url]'",
 	\	'bbcode_h':    "'[url=' . l:url . '][code]:h ' . l:tagname . '[/code][/url]'",
 	\	'bbcode_nt':   "'[url=' . l:url . '][code]' . l:tagname . '[/code][/url]'",
-	\	'plain':       "l:url"
+	\	'plain':       'l:url',
 	\}
 endif
 if !exists('g:helplink_copy_to_registers')
@@ -65,7 +65,7 @@ fun! s:get_tag(wordUnderCursor) abort
 	endif
 
 	" Let the user choose
-	let l:printText = ""
+	let l:printText = ''
 	let l:tagUnderCursor = -1
 	let l:i = 1
 	for l:t in l:tags
@@ -93,7 +93,7 @@ fun! s:quote_url(str) abort
 	let l:new = ''
 	for l:i in range(1, strlen(a:str))
 		let l:c = a:str[l:i - 1]
-		if l:c =~ '[a-zA-Z0-9\-._]'
+		if l:c =~? '[a-zA-Z0-9\-._]'
 			let l:new .= l:c
 		else
 			let l:new .= toupper(printf('%%%02x', char2nr(l:c)))
@@ -105,7 +105,7 @@ endfun
 
 " Make an URL
 fun! s:make_url() abort
-	if expand('%') == ''
+	if expand('%') ==# ''
 		return s:err('this buffer has no file')
 	endif
 

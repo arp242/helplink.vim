@@ -17,7 +17,7 @@ if !exists('g:helplink_copy_to_registers')
 	let g:helplink_copy_to_registers = ['+', '*']
 endif
 if !exists('g:helplink_url')
-	let g:helplink_url = 'http://vimhelp.appspot.com/%%FILE%%.html#%%TAGNAME_QUOTED%%'
+	let g:helplink_url = 'https://vimhelp.org/%%FILE%%.html#%%TAGNAME_QUOTED%%'
 endif
 if !exists('g:helplink_default_format')
 	let g:helplink_default_format = 'markdown'

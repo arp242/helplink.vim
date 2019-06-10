@@ -41,7 +41,7 @@ OPTIONS                                                     *helplink-options*
         Automatically copy the link to the specified registers.
 
 *g:helplink_url*                                 (URL, default:
-                 http://vimhelp.appspot.com/%%FILE%%.html#%%TAGNAME_QUOTED%%)
+                 https://vimhelp.org/%%FILE%%.html#%%TAGNAME_QUOTED%%)
 
         Available placeholders:
             - %%FILE%%            File name (e.g. |options.txt|)

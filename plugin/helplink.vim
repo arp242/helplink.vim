@@ -15,8 +15,8 @@ set cpo&vim
 
 augroup helplink.vim
 	autocmd!
-	autocmd Filetype help 
-		\ command! -buffer -nargs=* Helplink call s:echo(helplink#link(<q-args>))
+	autocmd Filetype help
+		\ command! -buffer -nargs=* -complete=custom,helplink#complete Helplink call s:echo(helplink#link(<q-args>))
 augroup end
 
 " Echo only if string is non-empty

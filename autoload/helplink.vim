@@ -41,6 +41,10 @@ fun! helplink#link(...) abort
 	return l:out
 endfun
 
+function! helplink#complete(_argument_lead, _command_line, _cursor_position)
+	return join(sort(keys(g:helplink_formats)), "\n")
+endfunction
+
 "##########################################################
 " Helper functions
 
